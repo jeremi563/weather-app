@@ -1,0 +1,360 @@
+/* -------------------------
+   Reset and basic styling
+-------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #222;
+  transition: background 1s ease; /* Smooth background change */
+  overflow-x: hidden; /* prevent horizontal scroll from effects */
+}
+
+/* -------------------------
+   Card styling
+-------------------------- */
+.card {
+  width: 90%;
+  max-width: 470px;
+  color: #fff;
+  margin: 100px auto 0;
+  background: linear-gradient(135deg, #00feba, #5b548a);
+  border-radius: 20px;
+  padding: 40px 35px;
+  text-align: center;
+  transition: background 1s ease; /* smooth background transition */
+  position: relative;
+  z-index: 1; /* above weather effects */
+}
+
+/* -------------------------
+   Search bar
+-------------------------- */
+.search {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search input {
+  border: 0;
+  outline: 0;
+  background: #befffc;
+  color: #555;
+  padding: 10px 25px;
+  height: 60px;
+  border-radius: 30px;
+  flex: 1;
+  margin-right: 16px;
+  font-size: 18px;
+}
+
+.search button {
+  border: 0;
+  outline: 0;
+  background: #befffc;
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+  cursor: pointer;
+}
+
+.search button img {
+  width: 16px;
+}
+
+/* -------------------------
+   Weather card
+-------------------------- */
+.weather-icon {
+  width: 170px;
+  margin-top: 30px;
+}
+
+.weather h1 {
+  font-size: 80px;
+  font-weight: 500;
+}
+
+.weather h2 {
+  font-size: 40px;
+  font-weight: 400;
+  margin-top: -10px;
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  margin-top: 50px;
+}
+
+.col {
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+
+.col img {
+  width: 40px;
+  margin-right: 10px;
+}
+
+.humidity,
+.wind {
+  font-size: 28px;
+  margin-top: -6px;
+}
+
+/* -------------------------
+   Weather and error messages
+-------------------------- */
+.weather {
+  display: none;
+}
+
+.error {
+  text-align: left;
+  margin-left: 10px;
+  font-size: 14px;
+  margin-top: 10px;
+  display: none;
+}
+
+/* -------------------------
+   Upgrade 3: Weather effects
+-------------------------- */
+#weather-effects {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* allow clicks through */
+  overflow: hidden;
+  z-index: 0; /* behind card */
+}
+
+/* Raindrop styling */
+.raindrop {
+  position: absolute;
+  top: -10px;
+  width: 2px;
+  height: 10px;
+  background: #a0e1ff;
+  opacity: 0.7;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* Snowflake styling */
+.snowflake {
+  position: absolute;
+  top: -10px;
+  width: 5px;
+  height: 5px;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* Falling animation */
+@keyframes fall {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+/* -------------------------
+   Optional: Smooth transitions for icons
+-------------------------- */
+.weather-icon {
+  transition: transform 0.5s ease;
+}
+
+.weather-icon:hover {
+  transform: scale(1.05);
+}
+
+/* -------------------------
+   Cloud and Mist Effects
+-------------------------- */
+#cloud-effects {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0; /* behind card */
+}
+
+.cloud,
+.mist {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.5;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* Cloud animation */
+.cloud {
+  width: 150px;
+  height: 80px;
+  background-image: url("./images/clouds.png"); /* use a transparent PNG cloud */
+  animation-name: cloudMove;
+}
+
+/* Mist animation */
+.mist {
+  width: 100%;
+  height: 150px;
+  background-image: url("./images/mist.png"); /* semi-transparent PNG */
+  animation-name: mistMove;
+}
+
+/* Floating keyframes */
+@keyframes cloudMove {
+  0% {
+    transform: translateX(-200px);
+  }
+  100% {
+    transform: translateX(120vw);
+  }
+}
+
+@keyframes mistMove {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(10vw);
+  } /* slow drift */
+}
+
+/* --- Small screens: phones --- */
+@media (max-width: 480px) {
+  .card {
+    width: 95%;
+    padding: 30px 20px;
+    margin-top: 50px;
+  }
+
+  .weather h1 {
+    font-size: 60px;
+  }
+
+  .weather h2 {
+    font-size: 28px;
+    margin-top: -5px;
+  }
+
+  .weather-icon {
+    width: 120px;
+    margin-top: 20px;
+  }
+
+  .details {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 30px;
+    padding: 0 10px;
+  }
+
+  .col {
+    margin-bottom: 15px;
+  }
+
+  .col img {
+    width: 30px;
+    margin-right: 8px;
+  }
+
+  .humidity,
+  .wind {
+    font-size: 22px;
+    margin-top: -4px;
+  }
+
+  .search input {
+    height: 50px;
+    padding: 8px 20px;
+    font-size: 16px;
+  }
+
+  .search button {
+    height: 50px;
+    width: 50px;
+  }
+}
+
+/* --- Medium screens: tablets --- */
+@media (max-width: 768px) {
+  .card {
+    width: 90%;
+    padding: 35px 30px;
+  }
+
+  .weather h1 {
+    font-size: 70px;
+  }
+
+  .weather h2 {
+    font-size: 32px;
+  }
+
+  .weather-icon {
+    width: 140px;
+  }
+
+  .details {
+    padding: 0 15px;
+  }
+
+  .humidity,
+  .wind {
+    font-size: 24px;
+  }
+
+  .search input {
+    font-size: 17px;
+    padding: 9px 22px;
+    height: 55px;
+  }
+
+  .search button {
+    height: 55px;
+    width: 55px;
+  }
+}
+
+/* --- Ensure effects scale properly on smaller screens --- */
+#weather-effects,
+#cloud-effects {
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.raindrop,
+.snowflake,
+.cloud,
+.mist {
+  transform-origin: center;
+}
